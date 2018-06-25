@@ -48,8 +48,8 @@ public class MainController implements Initializable{
 		return "MainController [tabpane=" + tabpane + ", tab=" + tab + ", menuBar=" + menuBar + "]";
 	}
 	
+	//Exit menu
 	public void exit(ActionEvent event) {
-		System.out.println("Inside Exit Menu");
 		System.exit(0);
 	}
 	
@@ -120,7 +120,9 @@ public class MainController implements Initializable{
 	}
 	
 	public void viewProduct(ActionEvent event) throws ClassNotFoundException, SQLException {
-		PrintReport viewReport = new PrintReport("select p.product_id, p.product_name, p.product_model, p.product_description, b.brand_name from product p, brand b where b.brand_id=p.bid","../Report/ViewProduct.jrxml");
+		PrintReport viewReport = new PrintReport(
+				"select p.product_id, p.product_name, p.product_model, p.product_description, b.brand_name from product p, brand b where b.brand_id=p.bid",
+				"../Report/ViewProduct.jrxml");
 		viewReport.showReport();
 	}
 	
@@ -151,20 +153,20 @@ public class MainController implements Initializable{
 	}
 
 	public void buyCurrentMonthReport(ActionEvent event) throws ClassNotFoundException, SQLException {
-		System.out.println("Inside BuyCurrentMonth Menu");
 		int month = LocalDate.now().getMonthValue();
 		int year = LocalDate.now().getYear();
 		String startOfMonth = "\'" + year + "-"+ month + "-" + "01" +"\'";
-		System.out.println("startOfMonth" + month);
 		String today = "\'" + LocalDate.now().toString() + "\'";
+		
 		PrintReport viewReport = new PrintReport(
-				"select sb.supplierdate, sb.supplierimei, pr.product_name, s.supplier_name, sb.supplierprice, s.supplier_mobile, sb.suppliertotal from supplierbill sb, product pr, supplier s where supplierdate>= "+ startOfMonth +"and supplierdate<= "+ today +" and sb.pid=pr.product_id and sb.sid=s.supplier_id",
+				"select sb.supplierdate, sb.supplierimei, pr.product_name, s.supplier_name, sb.supplierprice, s.supplier_mobile, sb.suppliertotal from supplierbill sb, product pr, supplier s where supplierdate>= "
+						+ startOfMonth + "and supplierdate<= " + today
+						+ " and sb.pid=pr.product_id and sb.sid=s.supplier_id",
 				"../Report/BuyReport.jrxml");
 		viewReport.showReport();
 	}
 	
 	public void buyCustomReport(ActionEvent event) throws ClassNotFoundException, SQLException {
-
 		try {
 			tab = new Tab("Buy Custom Report", FXMLLoader.load(getClass().getResource("BuyDatePicker.fxml")));
 			tabpane.getTabs().add(tab);
@@ -175,20 +177,20 @@ public class MainController implements Initializable{
 	}
 	
 	public void sellCurrentMonthReport(ActionEvent event) throws ClassNotFoundException, SQLException {
-		System.out.println("Inside SellCurrentMonth Menu");
 		int month = LocalDate.now().getMonthValue();
 		int year = LocalDate.now().getYear();
 		String startOfMonth = "\'" + year + "-"+ month + "-" + "01" +"\'";
-		System.out.println("startOfMonth" + month);
 		String today = "\'" + LocalDate.now().toString() + "\'";
+		
 		PrintReport viewReport = new PrintReport(
-				"select cb.customerdate, pr.product_name, cb.customerimei, c.customer_name, cb.customertotal from customerbill cb, product pr, customer c where customerdate>= "+ startOfMonth +" and customerdate<= "+ today + " and cb.pid=pr.product_id and cb.cid=c.customer_id",
+				"select cb.customerdate, pr.product_name, cb.customerimei, c.customer_name, cb.customertotal from customerbill cb, product pr, customer c where customerdate>= "
+						+ startOfMonth + " and customerdate<= " + today
+						+ " and cb.pid=pr.product_id and cb.cid=c.customer_id",
 				"../Report/SaleReport.jrxml");
 		viewReport.showReport();
 	}
 	
 	public void sellCustomReport(ActionEvent event) throws ClassNotFoundException, SQLException {
-		
 		try {
 			tab = new Tab("Sell Custom Report", FXMLLoader.load(getClass().getResource("SaleDatePicker.fxml")));
 			tabpane.getTabs().add(tab);	
@@ -205,11 +207,12 @@ public class MainController implements Initializable{
 			tab = new Tab("Login", loader.load());
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
-			System.out.println("In Login");
+			
+			//Get the LoginController object 
 			LoginController loginCon = loader.getController();
-			System.out.println("Got login controller");
+			
+			//Pass the MainController object to LoginController 
 			loginCon.injectMainController(this);
-			System.out.println("After login Controller");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -217,10 +220,7 @@ public class MainController implements Initializable{
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("Inside Init" + this);
 		menuBar.setDisable(true);
-		System.out.println("Menu disabled");
 		this.login();
-		System.out.println("After Login in Maincontroller");
 	}
 }
