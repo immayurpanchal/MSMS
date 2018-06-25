@@ -14,12 +14,10 @@ public class SellDatePickerController {
 	public void salePickDate(ActionEvent event) throws ClassNotFoundException, SQLException {
 		String sDate = "\'" + startDate.getValue() + "\'"; 
 		String eDate = "\'" + endDate.getValue() + "\'";
-		
-		System.out.println(sDate);
-		System.out.println(eDate);
-		
+				
 		PrintReport viewReport = new PrintReport(
-				"select cb.customerdate, pr.product_name, cb.customerimei, c.customer_name, cb.customertotal from customerbill cb, product pr, customer c where customerdate>= "+ sDate +" and customerdate<= "+ eDate + " and cb.pid=pr.product_id and cb.cid=c.customer_id",
+				"select cb.customerdate, pr.product_name, cb.customerimei, c.customer_name, cb.customertotal from customerbill cb, product pr, customer c where customerdate>= "
+						+ sDate + " and customerdate<= " + eDate + " and cb.pid=pr.product_id and cb.cid=c.customer_id",
 				"../Report/SaleReport.jrxml");
 		viewReport.showReport();
 	}
