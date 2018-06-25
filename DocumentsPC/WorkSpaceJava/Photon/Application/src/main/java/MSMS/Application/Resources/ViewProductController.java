@@ -14,7 +14,6 @@ public class ViewProductController {
 	@FXML private TableView<ArrayList<TableRow<HBox>>> table;
 	
 	public void search(ActionEvent event) {
-		System.out.println("Clicked");
 		ArrayList<TableRow<HBox>> al = new ArrayList<>();
 		TableRow<HBox> row = new TableRow<>();
 		HBox hbox = new HBox();
