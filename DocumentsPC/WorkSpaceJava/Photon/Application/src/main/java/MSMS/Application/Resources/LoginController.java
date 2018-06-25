@@ -33,15 +33,18 @@ public class LoginController implements Initializable {
 	SessionFactory sf;
 	Session session;
 	
-	public void login(ActionEvent event){	
+	public void login(ActionEvent event){
+		//Create Login Object
 		Login l = new Login();
 		l.setPassword(lblPassword.getText());
 		l.setUsername(lblUsername.getText());
 
+		//Find Username in database
 		session.beginTransaction();
 		Login temp = (Login) session.get(Login.class, lblUsername.getText());
 		session.getTransaction().commit();
 
+		//Show Error message if user doesn't exist
 		if (temp == null) {
 			System.out.println("User not");
 			snackbar.show("Username Not Found", 3000);
@@ -50,6 +53,7 @@ public class LoginController implements Initializable {
 		
 		lblUsername.requestFocus(); 
 
+		//Check password if username is correct
 		if (temp.getUsername().equals(lblUsername.getText()) && temp.getPassword().equals(lblPassword.getText())) {
 			mainController.getMenuBar().setDisable(false);
 			mainController.getTabpane().getTabs().remove(0);
@@ -59,21 +63,22 @@ public class LoginController implements Initializable {
 		else
 			snackbar.show("Wrong Password", 3000);
 
+		//Clear TextFields
 		lblUsername.setText("");
 		lblPassword.setText("");
 	}
 	
+	//Pass MainController object to LoginController
 	public void injectMainController(MainController mc) {
 		this.mainController = mc;
 	}
 	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		System.out.println("Inside Login Controller");
-		System.out.println(mainController);
-		/*mainController.getMenuBar().setDisable(true);*/
-		System.out.println("Inside Login Controller" + this);
-		config = new Configuration().configure().addAnnotatedClass(Login.class).addAnnotatedClass(Brand.class).addAnnotatedClass(Product.class).addAnnotatedClass(SupplierBill.class).addAnnotatedClass(CustomerBill.class).addAnnotatedClass(Stock.class).addAnnotatedClass(Supplier.class).addAnnotatedClass(Customer.class);
+		config = new Configuration().configure().addAnnotatedClass(Login.class).addAnnotatedClass(Brand.class)
+				.addAnnotatedClass(Product.class).addAnnotatedClass(SupplierBill.class)
+				.addAnnotatedClass(CustomerBill.class).addAnnotatedClass(Stock.class).addAnnotatedClass(Supplier.class)
+				.addAnnotatedClass(Customer.class);
 		sf = config.buildSessionFactory();
 		session = sf.openSession();
 	}
