@@ -42,27 +42,27 @@ public class PrintReport  extends JFrame {
     	Connection conn = DriverManager.getConnection(myUrl, "postgres", "root");
         Statement stmt = conn.createStatement();
         ResultSet rs;
-         try {
-        	 rs = stmt.executeQuery(this.query);
-        	 JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
-        	 	
-        	 InputStream is = this.getClass().getResourceAsStream(this.reportFileName);
-        	 JasperDesign jd = JRXmlLoader.load(is);
-             JasperReport jasperReport = JasperCompileManager.compileReport(jd);
-             
-             JasperPrint JasperPrint = JasperFillManager.fillReport(jasperReport, null, rsdt);
-             JRViewer viewer = new JRViewer(JasperPrint);
-             
-             viewer.setOpaque(true);
-             viewer.setVisible(true);
-             
-             this.add(viewer);
-             this.setSize(900,500); // JFrame size
-             this.setVisible(true);
-            
-         } catch (Exception e) {
-             JOptionPane.showMessageDialog(rootPane, e.getMessage());
-         }
-   
+        
+		try {
+			rs = stmt.executeQuery(this.query);
+			JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
+
+			InputStream is = this.getClass().getResourceAsStream(this.reportFileName);
+			JasperDesign jd = JRXmlLoader.load(is);
+			JasperReport jasperReport = JasperCompileManager.compileReport(jd);
+
+			JasperPrint JasperPrint = JasperFillManager.fillReport(jasperReport, null, rsdt);
+			JRViewer viewer = new JRViewer(JasperPrint);
+
+			viewer.setOpaque(true);
+			viewer.setVisible(true);
+
+			this.add(viewer);
+			this.setSize(900, 500); // JFrame size
+			this.setVisible(true);
+
+		} catch (Exception e) {
+			JOptionPane.showMessageDialog(rootPane, e.getMessage());
+		}   
     }
 }
