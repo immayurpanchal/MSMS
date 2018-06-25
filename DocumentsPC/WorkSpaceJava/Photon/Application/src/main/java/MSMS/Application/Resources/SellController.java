@@ -56,7 +56,6 @@ public class SellController implements Initializable{
 	@FXML private JFXTextField total;
 	@FXML private JFXTextField imei;
 	
-	
 	@FXML private JFXTextField cid;
 	@FXML private JFXTextField cname;
 	@FXML private JFXTextField cmobile;
@@ -76,6 +75,7 @@ public class SellController implements Initializable{
 	SessionFactory sf;
 	Session session;
 
+	@SuppressWarnings("unused")
 	public void sell(ActionEvent event) {
 		// Check any field should not be empty and all validations
 		if (!validProduct() && !validCustomer())
@@ -84,29 +84,28 @@ public class SellController implements Initializable{
 		// End of Validation
 		System.out.println("Inside Sell");
 		long tempImei = 0;
+		
 		try {
 			tempImei = Long.parseLong(imei.getText());
 		} catch (NumberFormatException e) {
 			System.out.println("Invalid IMEI number, Enter Only digits");
 			return;
 		}
-		System.out.println("got imei");
+		
 		SupplierBill supplierBill = null;
 
 		// Check whether entered imei no is valid or not by doing cross checking entry
 		// in Supplier Table. If it doesn't exist throw Exception
-		System.out.println("My imei is :" + tempImei);
 		try {
 			em.getTransaction().begin();
-			supplierBill = (SupplierBill) em.createQuery("from SupplierBill where supplierIMEI="+tempImei, SupplierBill.class).getSingleResult();
+			supplierBill = (SupplierBill) em
+					.createQuery("from SupplierBill where supplierIMEI=" + tempImei, SupplierBill.class)
+					.getSingleResult();
 			em.getTransaction().commit();
-			
 		} catch (NullPointerException e) {
 			System.out.println("Enter Valid IMEI");
 			return;
 		}
-		System.out.println(supplierBill.getSupplierIMEI() + " is in supplierbill table");
-		System.out.println("found item in stock");
 
 		try {
 			// Check whether entered item is in stock. If not throw exception as without
@@ -115,7 +114,6 @@ public class SellController implements Initializable{
 			Stock st = (Stock) em.createQuery("from Stock where pid=" + pid.getText(), Stock.class).getSingleResult();
 			em.getTransaction().commit();
 
-			System.out.println("Stock Query Executed Succeed");
 			if (st.getProduct_qty() <= 0) {
 				System.out.println("Without stock it is not possible to sell any item");
 				return;
@@ -131,18 +129,13 @@ public class SellController implements Initializable{
 				return;
 			}
 
-			System.out.println("Getting Date");
 			customerBill.setCustomerDate(LocalDate.now());
-			System.out.println("Got Date");
-
 			customerBill.setCustomerCGST(Double.parseDouble(cgst.getText().replaceAll(",", "")));
 			customerBill.setCustomerSGST(Double.parseDouble(sgst.getText().replaceAll(",", "")));
 			customerBill.setCustomerTotal(Double.parseDouble(total.getText().replaceAll(",", "")));
-			System.out.println("Price , GST, Total are set successfully");
 
 			// If Customer Doesn't exist in database, Create a new one.
 			if (cid.getText() == "") {
-				System.out.println("Inside customer IF");
 				Customer c = new Customer();
 				c.setCustomer_name(cname.getText());
 				c.setCustomer_mobile(Long.parseLong(cmobile.getText())); // Check Entered Mobile is valid (Done in
@@ -162,7 +155,6 @@ public class SellController implements Initializable{
 
 				customerBill.setCcustomer(c1);
 			} else {// Customer Exists in database//That means it is shown in the TreeTable as well.
-				System.out.println("Customer Exist in database");
 				Customer c = customerTreeView.getSelectionModel().getSelectedItem().getValue();
 				customerBill.setCcustomer(c);
 			}
@@ -175,13 +167,10 @@ public class SellController implements Initializable{
 				p.setProduct_description(pdescription.getText());
 
 				try {// Check whether brand exists for that product or not
-					System.out.println("Checking Brand Existance");
 					em.getTransaction().begin();
 					Brand b = (Brand) em.createQuery("from Brand where brand_name=" + pbrand.getText())
 							.getSingleResult();
 					em.getTransaction().commit();
-
-					System.out.println("Brand Query Succeed");
 					p.setBrand(b);
 				} catch (NullPointerException e) {
 					// Brand Doesn't Exist in Database, Create a new brand.
@@ -200,39 +189,29 @@ public class SellController implements Initializable{
 
 					p.setBrand(b1);
 				}
-				System.out.println("Product Trasaction Begin");
 				session.beginTransaction();
 				session.save(p);
 				session.getTransaction().commit();
-				System.out.println("Product Transaction commit");
 			} else {
-				System.out.println("Product Exists in database");
 				Product p = productTreeView.getSelectionModel().getSelectedItem().getValue();
-				System.out.println("Product Query succeed");
 				customerBill.setCproduct(p);
 			}
-
-			System.out.println("Begin CustomerBill transaction");
 			
 			try {
 				session.beginTransaction();
 				session.save(customerBill);
 				session.getTransaction().commit();
-				System.out.println("CustomerBill Transaction Commit");
 			}
 			catch(Exception e) {
 				System.out.println("Item is alreay sold You can't resell it");
 			}
 			
 			// Now decrease Stock by one as transaction is successful at this stage
-
 			st.setProduct_qty(st.getProduct_qty() - 1);
-
-			System.out.println("Stock Transaction Begin");
 			session.beginTransaction();
 			session.update(st);
 			session.getTransaction().commit();
-			System.out.println("Stock Transaction Commit");
+
 			// Clean Every TextField for new Entry After Successful Transaction
 			pid.setText("");
 			pname.setText("");
@@ -260,28 +239,23 @@ public class SellController implements Initializable{
 			cadd.setEditable(true);
 			cemail.setEditable(true);
 			cmobile.setEditable(true);
-
-			System.out.println("Congratulations!! you have sold one Mobile");
 		} catch (NullPointerException e) {
 			System.out.println("Sorry IMEI is wrong or you are trying to sell item which is not in stock");
 		}
-		System.out.println("Transaction succeed");
-		
+		System.out.println("Item Sold Successfully");
 	}
 	
-	
 	private boolean validCustomer() {
-		System.out.println("Inside validate Customer");
 		if(cadd.getText()!="" && cemail.getText()!="" && cname.getText()!="") {
 			try {
-				System.out.println("Inside if of validate Customer");
 				Pattern p = Pattern.compile("\\b^\\d{10}\\b");
 				Matcher m = p.matcher(cmobile.getText());
 				System.out.println("Pattern has got match");
 				
-				Pattern p1 = Pattern.compile("(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
+				Pattern p1 = Pattern.compile(
+						"(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|\"(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21\\x23-\\x5b\\x5d-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])*\")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\\x01-\\x08\\x0b\\x0c\\x0e-\\x1f\\x21-\\x5a\\x53-\\x7f]|\\\\[\\x01-\\x09\\x0b\\x0c\\x0e-\\x7f])+)\\])");
 				Matcher m1 = p1.matcher(cemail.getText());
-				if(m.matches() && m1.matches())
+				if (m.matches() && m1.matches())
 					return true;
 				return false;
 			}
@@ -290,10 +264,8 @@ public class SellController implements Initializable{
 				return false;
 			}
 		}
-		System.out.println("Outside if of Validate Customer");
 		return false;
 	}
-
 
 	private boolean validProduct() {
 		if(pbrand.getText()!="" && pdescription.getText()!="" && pmodel.getText()!="" && pname.getText()!="" && price.getText()!="") {
@@ -356,8 +328,6 @@ public class SellController implements Initializable{
 				new TreeItemPropertyValueFactory<>(new SimpleStringProperty("customer_add").get()));
 		customerEmails.setCellValueFactory(
 				new TreeItemPropertyValueFactory<>(new SimpleStringProperty("customer_email").get()));
-
-		System.out.println("Values set to cellFactory");
 
 		// Step 4 : Create Recursive Tree item and also don't forget to extend in
 		// Product Class
@@ -440,7 +410,6 @@ public class SellController implements Initializable{
 					}
 				});
 
-		System.out.println("Values set to cellFactory");
 		
 		// Step 4 : Create Recursive Tree item and also don't forget to extend in
 		// Product Class
@@ -453,16 +422,14 @@ public class SellController implements Initializable{
 
 	public void selectedProduct(InputEvent event) {
 		try {
-			System.out.println("Inside Selected product");
 			//Set Text Fields values to the selected table items
 			TreeItem<Product> temp = productTreeView.getSelectionModel().getSelectedItem();
-			System.out.println("detected selection model");
+			
 			pid.setText(Integer.toString(temp.getValue().getProduct_id()));
 			pname.setText(temp.getValue().getProduct_name());
 			pmodel.setText(temp.getValue().getProduct_model());
 			pdescription.setText(temp.getValue().getProduct_description());
 			pbrand.setText(temp.getValue().getBrand().getBrand_name());
-			System.out.println("text set for product in textfields");
 			
 			//Set Editable values to false because item is selected from the table
 			pid.setEditable(false);
@@ -470,8 +437,6 @@ public class SellController implements Initializable{
 			pmodel.setEditable(false);
 			pdescription.setEditable(false);
 			pbrand.setEditable(false);
-			
-			
 		}
 		catch(Exception e) {
 			System.out.println("Selection is not made accurately");
@@ -479,7 +444,6 @@ public class SellController implements Initializable{
 	}
 	
 	public void setGST(InputEvent event) {
-		System.out.println("Input detected");
 		if(price.getText()=="")
 			return;
 		else {
@@ -488,7 +452,7 @@ public class SellController implements Initializable{
 					double priceForGST = Double.parseDouble(price.getText());
 					DecimalFormat df = new DecimalFormat();
 					df.setMaximumFractionDigits(2);
-					System.out.println(priceForGST);
+
 					sgst.setText(df.format((priceForGST*0.1))+"");
 					sgst.setEditable(false);
 					cgst.setText(df.format((priceForGST*0.1))+"");
@@ -507,7 +471,6 @@ public class SellController implements Initializable{
 		}
 	}
 
-
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		pid.setEditable(false);
@@ -519,7 +482,6 @@ public class SellController implements Initializable{
 				.addAnnotatedClass(Stock.class).addAnnotatedClass(Supplier.class).addAnnotatedClass(Customer.class)
 				.addAnnotatedClass(Login.class);
 		sf = config.buildSessionFactory();
-		session = sf.openSession();
-		
+		session = sf.openSession();		
 	}
 }
