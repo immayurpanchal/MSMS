@@ -1,5 +1,6 @@
 package MSMS.Application.Resources;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -18,14 +19,15 @@ import com.jfoenix.controls.JFXTextField;
 import MSMS.Application.Login;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
 
 public class SignUpController implements Initializable{
 	@FXML private JFXTextField lblUsername;
 	@FXML private JFXPasswordField lblPassword;
 	@FXML private JFXSnackbar snackbar;
 	
-	@SuppressWarnings("unused")
 	private MainController mainController;
 	
 	Configuration config;
@@ -36,35 +38,33 @@ public class SignUpController implements Initializable{
 	EntityManagerFactory emf;
 	EntityManager em;
 	
-	public void signUp(ActionEvent event) {
+	public void signUp(ActionEvent event) throws IOException {
 		if(lblUsername.getText().isEmpty() || lblPassword.getText().isEmpty() ) {
 			snackbar.show("Fields should not be empty", 3000);
 			return;
 		}
-		
-		Login login=null;
-		try {
-			login = em.find(Login.class, lblUsername.getText());
+
+		Login login = null;
+		login = em.find(Login.class, lblUsername.getText());
+
+		if (login != null) {
+			snackbar.show("User Already Exist", 3000);
+			return;
 		}
-		catch(NullPointerException e) {
-			if(login==null) {
-				snackbar.show("User Already Exist", 3000);
-				return;
-			}
-			else {
-				login = new Login();
-				login.setUsername(lblUsername.getText());
-				login.setPassword(lblPassword.getText());
-				
-				session.beginTransaction();
-				session.save(login);
-				session.getTransaction().commit();
-				
-				snackbar.show("Registration Succeed", 3000);
-			}
-		}
-		
+		login = new Login();
+		login.setUsername(lblUsername.getText());
+		login.setPassword(lblPassword.getText());
+
+		session.beginTransaction();
+		session.save(login);
+		session.getTransaction().commit();
+
+		snackbar.show("Registration Succeed", 3000);
+		Tab loginTab = new Tab("Login", FXMLLoader.load(getClass().getResource("Login.fxml")));
+		mainController.getTabpane().getTabs().add(loginTab);
+		mainController.getTabpane().getSelectionModel().select(loginTab);
 	}
+	
 	// Pass MainController object to LoginController
 	public void injectMainController(MainController mc) {
 		this.mainController = mc;
