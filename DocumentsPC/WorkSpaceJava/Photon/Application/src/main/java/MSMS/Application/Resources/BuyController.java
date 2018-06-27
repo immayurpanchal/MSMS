@@ -15,6 +15,7 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
+import com.jfoenix.controls.JFXSnackbar;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
@@ -66,6 +67,7 @@ public class BuyController implements Initializable{
 	
 	@FXML private JFXTreeTableView<Product> productTreeView;
 	@FXML private JFXTreeTableView<Supplier> supplierTreeView;
+	@FXML private JFXSnackbar status;
 	
 	//Database Variables
 	Configuration config;
@@ -132,6 +134,8 @@ public class BuyController implements Initializable{
 		sadd.setText("");
 		smobile.setText("");
 		gstNo.setText("");
+		
+		status.show("You've bought product Successfully", 3000);
 	}
 	
 	//When Search Button of Product clicked 
@@ -218,7 +222,7 @@ public class BuyController implements Initializable{
 			
 		}
 		catch(Exception e) {
-			System.out.println("Selection is not made accurately");
+			status.show("Selection is not made accurately of Product", 3000);
 		}
 	}
 	
@@ -335,7 +339,7 @@ public class BuyController implements Initializable{
 			gstNo.setEditable(false);
 		}
 		catch(Exception e) {
-			System.out.println("Selection is not made properly");
+			status.show("Selection is not made properly of Supplier", 2000);
 		}
 	}
 
