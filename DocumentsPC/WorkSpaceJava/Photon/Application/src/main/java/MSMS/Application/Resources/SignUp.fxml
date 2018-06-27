@@ -56,7 +56,7 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                      <children>
-                        <JFXButton onAction="#login" prefHeight="50.0" prefWidth="250.0" text="Register" textFill="WHITE">
+                        <JFXButton onAction="#signUp" prefHeight="50.0" prefWidth="250.0" text="Register" textFill="WHITE">
                            <HBox.margin>
                               <Insets top="20.0" />
                            </HBox.margin>
