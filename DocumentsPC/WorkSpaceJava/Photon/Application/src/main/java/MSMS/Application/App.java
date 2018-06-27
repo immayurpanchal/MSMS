@@ -11,7 +11,6 @@ import javafx.stage.WindowEvent;
 
 public class App extends Application 
 {
-	//Learning Git in Eclipse
     public static void main( String[] args )
     {
     	launch(args);
