@@ -1,5 +1,6 @@
 package MSMS.Application.Resources;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -21,7 +22,10 @@ import MSMS.Application.Supplier;
 import MSMS.Application.SupplierBill;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Tab;
+import javafx.scene.control.TabPane;
 
 public class LoginController implements Initializable {
 	@FXML private JFXTextField lblUsername;
@@ -71,6 +75,25 @@ public class LoginController implements Initializable {
 	//Pass MainController object to LoginController
 	public void injectMainController(MainController mc) {
 		this.mainController = mc;
+	}
+	
+	public void signUp(ActionEvent event) {
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(getClass().getResource("SignUp.fxml"));
+			Tab tab = new Tab("SignUp", loader.load());
+			TabPane tabpane = mainController.getTabpane();
+			tabpane.getTabs().add(tab);	
+			tabpane.getSelectionModel().select(tab);
+			
+			//Get the LoginController object 
+			SignUpController signUpCon = loader.getController();
+			
+			//Pass the MainController object to SignUpController 
+			signUpCon.injectMainController(mainController);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	@Override
