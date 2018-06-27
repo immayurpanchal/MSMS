@@ -11,7 +11,7 @@ import javafx.stage.WindowEvent;
 
 public class App extends Application 
 {
-
+	//Inside Main of App
     public static void main( String[] args )
     {
     	launch(args);
