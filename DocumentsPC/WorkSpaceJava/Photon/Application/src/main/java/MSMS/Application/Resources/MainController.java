@@ -218,28 +218,10 @@ public class MainController implements Initializable{
 		}
 	}
 	
-	public void signUp() {
-		try {
-			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("SignUp.fxml"));
-			tab = new Tab("SignUp", loader.load());
-			tabpane.getTabs().add(tab);	
-			tabpane.getSelectionModel().select(tab);
-			
-			//Get the LoginController object 
-			SignUpController signUpCon = loader.getController();
-			
-			//Pass the MainController object to SignUpController 
-			signUpCon.injectMainController(this);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
 		menuBar.setDisable(true);
-		this.signUp();
-		/*this.login();*/
+		/*this.signUp();*/
+		this.login();
 	}
 }
