@@ -11,9 +11,8 @@ import javafx.stage.WindowEvent;
 
 public class App extends Application 
 {
-	//Protecting Branch Option Enabled
     public static void main( String[] args )
-    {
+    {	//calling Launch method 
     	launch(args);
     }
 
