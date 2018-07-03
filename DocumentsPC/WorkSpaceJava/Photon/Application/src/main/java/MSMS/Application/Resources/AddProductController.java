@@ -72,7 +72,6 @@ public class AddProductController implements Initializable {
 		em.getTransaction().begin();
 		productList = (ArrayList<Product>) em.createQuery("from Product").getResultList();
 		em.getTransaction().commit();
-		System.out.println("Query succeed");
 		
 		for(Product product : productList) {
 			if(product.getBrand().equals(selectedBrand) && product.getProduct_name().compareToIgnoreCase(pname.getText())==0 && product.getProduct_model().compareToIgnoreCase(pmodel.getText())==0) {
