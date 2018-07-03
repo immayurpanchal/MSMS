@@ -1,7 +1,13 @@
 package MSMS.Application.Resources;
 
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -30,15 +36,39 @@ public class AddBrandController implements Initializable {
 	SessionFactory sf;
 	Session session;
 	
-	public void addBrand(ActionEvent event) {
-		Brand b = new Brand();
+	EntityManagerFactory emf;
+	EntityManager em;
+	
+	@SuppressWarnings("unchecked")
+	public void addBrand(ActionEvent event) throws IOException {
+		
+		if(brandName.getText().isEmpty()){
+			status.show("Fields should not be empty", 2000);
+			return;
+		}
+		
+		ArrayList<Brand> brandList = new ArrayList<>();
+		
+		em.getTransaction().begin();
+		brandList = (ArrayList<Brand>) em.createQuery("from Brand").getResultList();
+		em.getTransaction().commit();
+
+		System.out.println("Query Succeed");
+		
+		for(Brand brand : brandList) {
+			if(brand.getBrand_name().compareToIgnoreCase(brandName.getText())==0) {
+				status.show("Brand Already Exist", 3000);
+				return;
+			}
+		}
+		
+		Brand b= new Brand();
 		b.setBrand_name(brandName.getText());
 		
 		session.beginTransaction();
 		session.save(b);
 		session.getTransaction().commit();
-
-		//Show snackbar for Successfully added Brand
+		brandName.setText(""); 
 		status.show("Brand Added Successfully", 2000);
 	}
 
@@ -51,5 +81,8 @@ public class AddBrandController implements Initializable {
 				.addAnnotatedClass(Customer.class);
 		sf = config.buildSessionFactory();
 		session = sf.openSession();
+		
+		emf = Persistence.createEntityManagerFactory("pu");
+		em = emf.createEntityManager();
 	}
 }
