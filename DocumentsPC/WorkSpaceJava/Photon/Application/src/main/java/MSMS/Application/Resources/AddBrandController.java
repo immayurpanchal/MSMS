@@ -52,8 +52,6 @@ public class AddBrandController implements Initializable {
 		em.getTransaction().begin();
 		brandList = (ArrayList<Brand>) em.createQuery("from Brand").getResultList();
 		em.getTransaction().commit();
-
-		System.out.println("Query Succeed");
 		
 		for(Brand brand : brandList) {
 			if(brand.getBrand_name().compareToIgnoreCase(brandName.getText())==0) {
