@@ -79,6 +79,9 @@ public class BuyController implements Initializable{
 	EntityManager em;
 	
 	public void buy(ActionEvent event) {
+		
+		//validation
+		
 		//Create SupplierBill Object and set all required values
 		SupplierBill sb = new SupplierBill();
 		sb.setSupplierIMEI(Long.parseLong(imei.getText()));
