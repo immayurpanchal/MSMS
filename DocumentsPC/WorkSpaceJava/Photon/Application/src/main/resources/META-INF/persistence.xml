@@ -6,6 +6,8 @@
              version="2.1">
 
     <persistence-unit name="pu" transaction-type="RESOURCE_LOCAL">
+
+    
     <class>MSMS.Application.Login</class>
     <class>MSMS.Application.Brand</class>
     <class>MSMS.Application.Customer</class>
@@ -14,20 +16,7 @@
     <class>MSMS.Application.Stock</class>
     <class>MSMS.Application.Supplier</class>
     <class>MSMS.Application.SupplierBill</class>
-    <class>MSMS.Application.Resources.AddBrandController</class>
-    <class>MSMS.Application.Resources.AddCustomerController</class>
-    <class>MSMS.Application.Resources.AddProductController</class>
-    <class>MSMS.Application.Resources.AddSupplierController</class>
-    <class>MSMS.Application.Resources.BuyController</class>
-    <class>MSMS.Application.Resources.BuyDatePickerController</class>
-    <class>MSMS.Application.Resources.DashboardController</class>
-    <class>MSMS.Application.Resources.LoginController</class>
-    <class>MSMS.Application.Resources.MainController</class>
-    <class>MSMS.Application.Resources.PrintReport</class>
-    <class>MSMS.Application.Resources.SellController</class>
-    <class>MSMS.Application.Resources.SellDatePickerController</class>
-    <class>MSMS.Application.Resources.SignUpController</class>
-    <class>MSMS.Application.Resources.ViewProductController</class>
+    
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->

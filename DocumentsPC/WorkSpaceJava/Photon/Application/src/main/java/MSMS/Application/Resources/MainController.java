@@ -123,7 +123,7 @@ public class MainController implements Initializable{
 	public void viewProduct(ActionEvent event) throws ClassNotFoundException, SQLException {
 		PrintReport viewReport = new PrintReport(
 				"select p.product_id, p.product_name, p.product_model, p.product_description, b.brand_name from product p, brand b where b.brand_id=p.bid",
-				"../Report/ViewProduct.jrxml");
+				"..//Report//ViewProduct.jrxml");
 		viewReport.showReport();
 	}
 	

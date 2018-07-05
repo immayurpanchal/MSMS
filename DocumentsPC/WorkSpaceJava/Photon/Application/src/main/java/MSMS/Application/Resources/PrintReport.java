@@ -46,7 +46,6 @@ public class PrintReport  extends JFrame {
 		try {
 			rs = stmt.executeQuery(this.query);
 			JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
-
 			InputStream is = this.getClass().getResourceAsStream(this.reportFileName);
 			JasperDesign jd = JRXmlLoader.load(is);
 			JasperReport jasperReport = JasperCompileManager.compileReport(jd);
