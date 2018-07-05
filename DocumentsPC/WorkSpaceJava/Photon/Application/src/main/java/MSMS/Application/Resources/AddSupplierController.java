@@ -1,7 +1,12 @@
 package MSMS.Application.Resources;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -21,7 +26,6 @@ import MSMS.Application.SupplierBill;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.layout.VBox;
 
 public class AddSupplierController implements Initializable{
 	@FXML private JFXTextField sname;
@@ -29,14 +33,50 @@ public class AddSupplierController implements Initializable{
 	@FXML private JFXTextField smobile;
 	@FXML private JFXTextArea saddress;
 	@FXML private JFXTextField sgstNo;
-	@FXML private VBox snackBar;
+	@FXML private JFXSnackbar status;
 	
 	//Database Connection
 	Configuration config;
 	SessionFactory sf;
 	Session session;
 	
+	EntityManagerFactory emf=Persistence.createEntityManagerFactory("pu")  ;
+	EntityManager em=emf.createEntityManager();
+	
+	String regexStr = "^[0-9]{10}$";
+	
+	@SuppressWarnings("unchecked")
 	public void addSeller(ActionEvent event) {
+		if(sname.getText().isEmpty()||semail.getText().isEmpty()||smobile.getText().isEmpty()||saddress.getText().isEmpty()||sgstNo.getText().isEmpty()) {
+			status.show("Fields should not be empty", 2000);
+			return;
+		}
+		
+		if( !(smobile.getText().matches(regexStr)) )
+		{
+			status.show("Mobile Number is not valid", 3000);
+			return;
+		}
+		
+		if(sgstNo.getText().length()!=15)
+		{
+			status.show("GSTNO should be 15 Characters/Digits", 3000);
+			return;
+		}
+		
+		ArrayList<Supplier> supplierList = new ArrayList<>();
+		em.getTransaction().begin();
+		supplierList = (ArrayList<Supplier>) em.createQuery("from Supplier").getResultList();
+		em.getTransaction().commit();
+		
+		for(Supplier supplier : supplierList)
+		{
+			if(supplier.getSupplier_gst().compareToIgnoreCase(sgstNo.getText())==0 ) {
+				status.show("Supplier Already Exist", 3000);
+				return;
+			}
+		}
+		
 		//Create Supplier Object
 		Supplier s = new Supplier();
 		s.setSupplier_name(sname.getText());
@@ -50,9 +90,9 @@ public class AddSupplierController implements Initializable{
 		session.getTransaction().commit();
 
 		//Show Success Message
-		JFXSnackbar sb = new JFXSnackbar(snackBar);
-		sb.show("Supplier Added Successfully", 1000);
-
+		//JFXSnackbar sb = new JFXSnackbar(snackBar);
+		//sb.show("Supplier Added Successfully", 1000);
+		status.show("Supplier Added Successfully", 1000);
 		//Clear Textfields After adding
 		saddress.setText("");
 		semail.setText("");

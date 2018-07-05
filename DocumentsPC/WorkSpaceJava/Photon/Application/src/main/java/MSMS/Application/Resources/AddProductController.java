@@ -47,18 +47,42 @@ public class AddProductController implements Initializable {
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("pu");
 	EntityManager em = emf.createEntityManager();
 	
+	@SuppressWarnings("unchecked")
 	public void addProduct(ActionEvent event) {
-		//Save Selected Brand in temp variable 
-		Brand temp=null;
 		
-		//Get the selected Brand and store it in temp
-		for(Brand b : l)
-			if(b.getBrand_name()==brandList.getSelectionModel().getSelectedItem())
-				temp = b;
+		//Save Selected Brand in temp variable 
+		Brand selectedBrand=null;
+				
+				//Get the selected Brand and store it in temp
+				for(Brand b : l)
+					if(b.getBrand_name()==brandList.getSelectionModel().getSelectedItem())
+							selectedBrand = b;
+		
+		if(selectedBrand ==null || pmodel.getText().isEmpty() || pname.getText().isEmpty() || pdescription.getText().isEmpty())
+		{
+			snackbar.show("Fields should not be empty", 2000);
+			return;
+		}
+
+		//validation for checking already exist product
+		//brand model name
+
+		ArrayList<Product> productList = new ArrayList<>();
+		
+		em.getTransaction().begin();
+		productList = (ArrayList<Product>) em.createQuery("from Product").getResultList();
+		em.getTransaction().commit();
+		
+		for(Product product : productList) {
+			if(product.getBrand().equals(selectedBrand) && product.getProduct_name().compareToIgnoreCase(pname.getText())==0 && product.getProduct_model().compareToIgnoreCase(pmodel.getText())==0) {
+				snackbar.show("Product Already Exist", 3000);
+				return;
+			}
+		}
 		
 		//Create Product Object 
 		Product p = new Product();
-		p.setBrand(temp);
+		p.setBrand(selectedBrand);
 		p.setProduct_model(pmodel.getText());
 		p.setProduct_name(pname.getText());
 		p.setProduct_description(pdescription.getText());
