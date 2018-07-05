@@ -89,6 +89,7 @@ public class MainController implements Initializable{
 	public void addSupplier(ActionEvent event) {
 		System.out.println("Inside AddSupplier Menu");
 		try {
+			System.out.println("inside");
 			tab = new Tab("Add Supplier", FXMLLoader.load(getClass().getResource("AddSupplier.fxml")));
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
