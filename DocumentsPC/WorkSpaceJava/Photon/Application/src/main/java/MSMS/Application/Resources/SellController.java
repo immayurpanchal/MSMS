@@ -299,7 +299,6 @@ public class SellController implements Initializable{
 		JFXTreeTableColumn<Customer, String> customerEmails = new JFXTreeTableColumn<>("Email");
 		JFXTreeTableColumn<Customer, String> customerAddresses = new JFXTreeTableColumn<>("Address");
 		customerTreeView.getColumns().addAll(customerIDs, customerNames, customerMobiles, customerAddresses, customerEmails);
-
 		System.out.println("Columns Added");
 
 		// Step 1.1 : Get the data from the database
