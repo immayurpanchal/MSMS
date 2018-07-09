@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
-<?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXSnackbar?>
 <?import com.jfoenix.controls.JFXTextArea?>
 <?import com.jfoenix.controls.JFXTextField?>
@@ -12,37 +11,20 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="700.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MSMS.Application.Resources.AddProductController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MSMS.Application.Controller.AddSupplierController">
    <children>
-      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="610.0" prefWidth="710.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="450.0" prefWidth="450.0" styleClass="shadow">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" styleClass="shadow">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
                      <children>
-                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" text="Brand">
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="60.0" text="Name">
                            <font>
                               <Font name="Segoe UI Light" size="16.0" />
                            </font>
                         </Label>
-                        <JFXComboBox fx:id="brandList" onShowing="#fillComboBox" prefWidth="250.0" promptText="Select Brand" styleClass="myFont">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                        </JFXComboBox>
-                     </children>
-                     <VBox.margin>
-                        <Insets top="50.0" />
-                     </VBox.margin>
-                  </HBox>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
-                     <children>
-                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" text="Name">
-                           <font>
-                              <Font name="Segoe UI Light" size="16.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="pname" prefHeight="25.0" prefWidth="250.0">
+                        <JFXTextField fx:id="sname" prefHeight="25.0" prefWidth="250.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -54,12 +36,12 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
                      <children>
-                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" text="Model">
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="60.0" text="Email">
                            <font>
                               <Font name="Segoe UI Light" size="16.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="pmodel" prefHeight="25.0" prefWidth="250.0">
+                        <JFXTextField fx:id="semail" prefHeight="25.0" prefWidth="250.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -71,12 +53,29 @@
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
                      <children>
-                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="80.0" text="Description">
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="60.0" text="Mobile">
                            <font>
                               <Font name="Segoe UI Light" size="16.0" />
                            </font>
                         </Label>
-                        <JFXTextArea fx:id="pdescription" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="250.0">
+                        <JFXTextField fx:id="smobile" prefHeight="25.0" prefWidth="250.0">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Segoe UI Light" size="16.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
+                     <children>
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="60.0" text="Address">
+                           <font>
+                              <Font name="Segoe UI Light" size="16.0" />
+                           </font>
+                        </Label>
+                        <JFXTextArea fx:id="saddress" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="250.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -86,25 +85,41 @@
                         </JFXTextArea>
                      </children>
                   </HBox>
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
+                     <children>
+                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="60.0" text="GST No.">
+                           <font>
+                              <Font name="Segoe UI Light" size="16.0" />
+                           </font>
+                        </Label>
+                        <JFXTextField fx:id="sgstNo" prefHeight="25.0" prefWidth="250.0">
+                           <HBox.margin>
+                              <Insets right="20.0" />
+                           </HBox.margin>
+                           <font>
+                              <Font name="Segoe UI Light" size="16.0" />
+                           </font>
+                        </JFXTextField>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="700.0">
                      <children>
-                        <JFXButton onAction="#addProduct" prefHeight="50.0" prefWidth="250.0" text="Add Product" textFill="WHITE">
+                        <JFXButton onAction="#addSeller" prefHeight="100.0" prefWidth="250.0" text="Add Supplier" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Light" size="16.0" />
                            </font>
                         </JFXButton>
                      </children>
                      <VBox.margin>
-                        <Insets top="25.0" />
+                        <Insets top="30.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="700.0">
+                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="50.0" prefWidth="500.0">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="450.0">
                            <children>
-                              <JFXSnackbar fx:id="snackbar" prefWidth="400.0" />
-                           </children>
-                        </VBox>
+                              <JFXSnackbar fx:id="status" />
+                           </children></VBox>
                      </children>
                   </HBox>
                </children>

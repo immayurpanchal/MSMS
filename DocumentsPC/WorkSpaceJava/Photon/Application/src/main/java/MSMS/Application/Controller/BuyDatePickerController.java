@@ -1,4 +1,4 @@
-package MSMS.Application.Resources;
+package MSMS.Application.Controller;
 
 import java.sql.SQLException;
 
@@ -18,7 +18,7 @@ public class BuyDatePickerController {
 		PrintReport viewReport = new PrintReport(
 				"select sb.supplierdate, sb.supplierimei, pr.product_name, s.supplier_name, sb.supplierprice, s.supplier_mobile, sb.suppliertotal from supplierbill sb, product pr, supplier s where supplierdate>= "
 						+ sDate + " and supplierdate<= " + eDate + " and sb.pid=pr.product_id and sb.sid=s.supplier_id",
-				"../Report/BuyReport.jrxml");
+				"/MSMS/Application/Resources/Reports/BuyReport.jrxml");
 		viewReport.showReport();
 	}
 }

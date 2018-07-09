@@ -1,4 +1,4 @@
-package MSMS.Application.Resources;
+package MSMS.Application.Controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -56,7 +56,7 @@ public class MainController implements Initializable{
 	public void addBrand(ActionEvent event) {
 		System.out.println("Inside AddBrand Menu");
 		try {
-			tab = new Tab("Add Brand", FXMLLoader.load(getClass().getResource("AddBrand.fxml")));
+			tab = new Tab("Add Brand", FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/AddBrand.fxml")));
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
 		} catch (IOException e) {
@@ -67,7 +67,7 @@ public class MainController implements Initializable{
 	public void addProduct(ActionEvent event) {
 		System.out.println("Inside AddProduct Menu");
 		try {
-			tab = new Tab("Add Product", FXMLLoader.load(getClass().getResource("AddProduct.fxml")));
+			tab = new Tab("Add Product", FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/AddProduct.fxml")));
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
 		} catch (IOException e) {
@@ -78,7 +78,7 @@ public class MainController implements Initializable{
 	public void addCustomer(ActionEvent event) {
 		System.out.println("Inside AddCustomer Menu");
 		try {
-			tab = new Tab("Add Customer", FXMLLoader.load(getClass().getResource("AddCustomer.fxml")));
+			tab = new Tab("Add Customer", FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/AddCustomer.fxml")));
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
 		} catch (IOException e) {
@@ -90,7 +90,7 @@ public class MainController implements Initializable{
 		System.out.println("Inside AddSupplier Menu");
 		try {
 			System.out.println("inside");
-			tab = new Tab("Add Supplier", FXMLLoader.load(getClass().getResource("AddSupplier.fxml")));
+			tab = new Tab("Add Supplier", FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/AddSupplier.fxml")));
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
 		} catch (IOException e) {
@@ -101,7 +101,7 @@ public class MainController implements Initializable{
 	public void buy(ActionEvent event) {
 		System.out.println("Inside AddSupplier Menu");
 		try {
-			tab = new Tab("Buy", FXMLLoader.load(getClass().getResource("Buy.fxml")));
+			tab = new Tab("Buy", FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/Buy.fxml")));
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
 		} catch (IOException e) {
@@ -112,7 +112,7 @@ public class MainController implements Initializable{
 	public void sell(ActionEvent event) {
 		System.out.println("Inside AddSupplier Menu");
 		try {
-			tab = new Tab("Sell", FXMLLoader.load(getClass().getResource("Sell.fxml")));
+			tab = new Tab("Sell", FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/Sell.fxml")));
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
 		} catch (IOException e) {
@@ -123,29 +123,30 @@ public class MainController implements Initializable{
 	public void viewProduct(ActionEvent event) throws ClassNotFoundException, SQLException {
 		PrintReport viewReport = new PrintReport(
 				"select p.product_id, p.product_name, p.product_model, p.product_description, b.brand_name from product p, brand b where b.brand_id=p.bid",
-				"..//Report//ViewProduct.jrxml");
+				"/MSMS/Application/Resources/Reports/ViewProduct.jrxml");
 		viewReport.showReport();
 	}
 	
 	public void viewCustomer(ActionEvent event) throws ClassNotFoundException, SQLException {
-		PrintReport viewReport = new PrintReport("select * from Customer","../Report/ViewCustomer.jrxml");
+		System.out.println("View Customer Report");
+		PrintReport viewReport = new PrintReport("select * from Customer","/MSMS/Application/Resources/Reports/ViewCustomer.jrxml");
 		viewReport.showReport();
 	}
 	
 	public void viewBrand(ActionEvent event) throws ClassNotFoundException, SQLException {
-		PrintReport viewReport = new PrintReport("select * from Brand","../Report/ViewBrand.jrxml");
+		PrintReport viewReport = new PrintReport("select * from Brand","/MSMS/Application/Resources/Reports/ViewBrand.jrxml");
 		viewReport.showReport();
 	}
 	
 	public void viewSupplier(ActionEvent event) throws ClassNotFoundException, SQLException {
-		PrintReport viewReport = new PrintReport("select * from Supplier","../Report/ViewSupplier.jrxml");
+		PrintReport viewReport = new PrintReport("select * from Supplier","/MSMS/Application/Resources/Reports/ViewSupplier.jrxml");
 		viewReport.showReport();
 	}
 	
 	public void viewDashboard(ActionEvent event) {
 		System.out.println("Inside AddSupplier Menu");
 		try {
-			tab = new Tab("Dashboard", FXMLLoader.load(getClass().getResource("Dashboard.fxml")));
+			tab = new Tab("Dashboard", FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/Dashboard.fxml")));
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
 		} catch (IOException e) {
@@ -163,13 +164,13 @@ public class MainController implements Initializable{
 				"select sb.supplierdate, sb.supplierimei, pr.product_name, s.supplier_name, sb.supplierprice, s.supplier_mobile, sb.suppliertotal from supplierbill sb, product pr, supplier s where supplierdate>= "
 						+ startOfMonth + "and supplierdate<= " + today
 						+ " and sb.pid=pr.product_id and sb.sid=s.supplier_id",
-				"../Report/BuyReport.jrxml");
+				"/MSMS/Application/Resources/Reports/BuyReport.jrxml");
 		viewReport.showReport();
 	}
 	
 	public void buyCustomReport(ActionEvent event) throws ClassNotFoundException, SQLException {
 		try {
-			tab = new Tab("Buy Custom Report", FXMLLoader.load(getClass().getResource("BuyDatePicker.fxml")));
+			tab = new Tab("Buy Custom Report", FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/BuyDatePicker.fxml")));
 			tabpane.getTabs().add(tab);
 			tabpane.getSelectionModel().select(tab);
 		} catch (IOException e) {
@@ -187,13 +188,13 @@ public class MainController implements Initializable{
 				"select cb.customerdate, pr.product_name, cb.customerimei, c.customer_name, cb.customertotal from customerbill cb, product pr, customer c where customerdate>= "
 						+ startOfMonth + " and customerdate<= " + today
 						+ " and cb.pid=pr.product_id and cb.cid=c.customer_id",
-				"../Report/SaleReport.jrxml");
+				"/MSMS/Application/Resources/Reports/SaleReport.jrxml");
 		viewReport.showReport();
 	}
 	
 	public void sellCustomReport(ActionEvent event) throws ClassNotFoundException, SQLException {
 		try {
-			tab = new Tab("Sell Custom Report", FXMLLoader.load(getClass().getResource("SaleDatePicker.fxml")));
+			tab = new Tab("Sell Custom Report", FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/SaleDatePicker.fxml")));
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);
 		} catch (IOException e) {
@@ -204,7 +205,7 @@ public class MainController implements Initializable{
 	public void login() {		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("Login.fxml"));
+			loader.setLocation(getClass().getResource("/MSMS/Application/Controller/View/Login.fxml"));
 			tab = new Tab("Login", loader.load());
 			tabpane.getTabs().add(tab);	
 			tabpane.getSelectionModel().select(tab);

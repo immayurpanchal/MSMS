@@ -12,18 +12,20 @@ import javafx.stage.WindowEvent;
 public class App extends Application 
 {
     public static void main( String[] args ) {
+    	System.out.println("Inside Launch Method");
     	launch(args);
+    	System.out.println("After Launch Method");
     }
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
-		Parent root = FXMLLoader.load(getClass().getResource("Resources/Main.fxml"));
-		Scene scene = new Scene(root,700,600);
+		Parent root = FXMLLoader.load(getClass().getResource("/MSMS/Application/Controller/View/Main.fxml"));
+		Scene scene = new Scene(root,700,650);
 		primaryStage.setScene(scene);
 		primaryStage.setTitle("Mobile Stock Management System - Developed By Kaizen");
 		primaryStage.show();
 		
-		//Change Default Close behaviour to custom.
+		//Change Default Close behavior to custom.
 		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
 			
 			@Override

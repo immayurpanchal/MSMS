@@ -1,4 +1,4 @@
-package MSMS.Application.Resources;
+package MSMS.Application.Controller;
 
 import java.io.IOException;
 import java.net.URL;

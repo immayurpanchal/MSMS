@@ -1,5 +1,5 @@
 .background-image {
-	-fx-background-image: url("../img/windows_8_simple_background-wallpaper-1366x768.jpg");
+	-fx-background-image: url("Resources/windows_8_simple_background-wallpaper-1366x768.jpg");
 	-fx-background-repeat: no-repeat;
 	-fx-background-size: cover;
 }

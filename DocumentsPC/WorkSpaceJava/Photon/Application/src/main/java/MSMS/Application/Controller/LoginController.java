@@ -1,4 +1,4 @@
-package MSMS.Application.Resources;
+package MSMS.Application.Controller;
 
 import java.io.IOException;
 import java.net.URL;
@@ -80,7 +80,7 @@ public class LoginController implements Initializable {
 	public void signUp(ActionEvent event) {
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(getClass().getResource("SignUp.fxml"));
+			loader.setLocation(getClass().getResource("/MSMS/Application/Controller/View/SignUp.fxml"));
 			Tab tab = new Tab("SignUp", loader.load());
 			TabPane tabpane = mainController.getTabpane();
 			tabpane.getTabs().add(tab);	

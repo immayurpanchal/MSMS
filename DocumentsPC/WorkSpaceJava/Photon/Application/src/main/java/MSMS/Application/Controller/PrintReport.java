@@ -1,4 +1,4 @@
-package MSMS.Application.Resources;
+package MSMS.Application.Controller;
 
 import java.io.InputStream;
 import java.sql.Connection;
@@ -36,6 +36,7 @@ public class PrintReport  extends JFrame {
 	}
 
     public void showReport() throws ClassNotFoundException, SQLException{
+    	System.out.println("Inside Show Report");
     	String myDriver = "org.postgresql.Driver";
     	String myUrl = "jdbc:postgresql://localhost:1234/stmgmt";
     	Class.forName(myDriver);
@@ -46,10 +47,11 @@ public class PrintReport  extends JFrame {
 		try {
 			rs = stmt.executeQuery(this.query);
 			JRResultSetDataSource rsdt = new JRResultSetDataSource(rs);
+			System.out.println("Before getting the File");
 			InputStream is = this.getClass().getResourceAsStream(this.reportFileName);
 			JasperDesign jd = JRXmlLoader.load(is);
+			System.out.println("After Getting the file");
 			JasperReport jasperReport = JasperCompileManager.compileReport(jd);
-
 			JasperPrint JasperPrint = JasperFillManager.fillReport(jasperReport, null, rsdt);
 			JRViewer viewer = new JRViewer(JasperPrint);
 

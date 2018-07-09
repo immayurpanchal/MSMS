@@ -11,11 +11,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="500.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MSMS.Application.Resources.AddSupplierController">
+<AnchorPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="500.0" stylesheets="@application.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="MSMS.Application.Controller.AddCustomerController">
    <children>
-      <VBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="600.0" prefWidth="700.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <VBox alignment="CENTER" prefHeight="450.0" prefWidth="450.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="500.0" prefWidth="450.0" styleClass="shadow">
+            <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="450.0" prefWidth="450.0" styleClass="shadow">
                <children>
                   <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
                      <children>
@@ -24,7 +24,7 @@
                               <Font name="Segoe UI Light" size="16.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="sname" prefHeight="25.0" prefWidth="250.0">
+                        <JFXTextField fx:id="cname" prefHeight="25.0" prefWidth="250.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -41,7 +41,7 @@
                               <Font name="Segoe UI Light" size="16.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="semail" prefHeight="25.0" prefWidth="250.0">
+                        <JFXTextField fx:id="cemail" prefHeight="25.0" prefWidth="250.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -58,7 +58,7 @@
                               <Font name="Segoe UI Light" size="16.0" />
                            </font>
                         </Label>
-                        <JFXTextField fx:id="smobile" prefHeight="25.0" prefWidth="250.0">
+                        <JFXTextField fx:id="cmobile" prefHeight="25.0" prefWidth="250.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -75,7 +75,7 @@
                               <Font name="Segoe UI Light" size="16.0" />
                            </font>
                         </Label>
-                        <JFXTextArea fx:id="saddress" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="250.0">
+                        <JFXTextArea fx:id="caddress" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="25.0" prefWidth="250.0">
                            <HBox.margin>
                               <Insets right="20.0" />
                            </HBox.margin>
@@ -85,43 +85,31 @@
                         </JFXTextArea>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
-                     <children>
-                        <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="25.0" prefWidth="60.0" text="GST No.">
-                           <font>
-                              <Font name="Segoe UI Light" size="16.0" />
-                           </font>
-                        </Label>
-                        <JFXTextField fx:id="sgstNo" prefHeight="25.0" prefWidth="250.0">
-                           <HBox.margin>
-                              <Insets right="20.0" />
-                           </HBox.margin>
-                           <font>
-                              <Font name="Segoe UI Light" size="16.0" />
-                           </font>
-                        </JFXTextField>
-                     </children>
-                  </HBox>
                   <HBox alignment="CENTER" prefHeight="50.0" prefWidth="700.0">
                      <children>
-                        <JFXButton onAction="#addSeller" prefHeight="100.0" prefWidth="250.0" text="Add Supplier" textFill="WHITE">
+                        <JFXButton onAction="#addCustomer" prefHeight="100.0" prefWidth="250.0" text="Add Customer" textFill="WHITE">
                            <font>
                               <Font name="Segoe UI Light" size="16.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </JFXButton>
                      </children>
                      <VBox.margin>
                         <Insets top="30.0" />
                      </VBox.margin>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="60.0" prefWidth="700.0">
+                  <HBox alignment="CENTER" prefHeight="50.0" prefWidth="700.0">
                      <children>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="450.0">
+                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="400.0">
                            <children>
                               <JFXSnackbar fx:id="status" />
                            </children></VBox>
                      </children>
-                  </HBox>
+                     <VBox.margin>
+                        <Insets top="10.0" />
+                     </VBox.margin></HBox>
                </children>
             </VBox>
          </children>
