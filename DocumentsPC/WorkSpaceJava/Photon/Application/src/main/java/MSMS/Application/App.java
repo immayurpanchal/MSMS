@@ -26,8 +26,7 @@ public class App extends Application
 		primaryStage.show();
 		
 		//Change Default Close behavior to custom.
-		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-			
+		primaryStage.setOnCloseRequest(new EventHandler<WindowEvent>() {			
 			@Override
 			public void handle(WindowEvent event) {
 				Platform.exit();
