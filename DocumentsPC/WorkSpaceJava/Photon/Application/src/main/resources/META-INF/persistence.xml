@@ -20,7 +20,7 @@
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.postgresql.Driver" /> <!-- DB Driver -->
-            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:1234/stmgmt" /> <!-- BD Mane -->
+            <property name="javax.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/stmgmt" /> <!-- BD Mane -->
             <property name="javax.persistence.jdbc.user" value="postgres" /> <!-- DB User -->
             <property name="javax.persistence.jdbc.password" value="root" /> <!-- DB Password -->
 
@@ -31,7 +31,7 @@
             <property name="hibernate.format_sql" value="true" />
             <property name="hibernate.ejb.cfgfile" value="hibernate.cfg.xml"/>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
-            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:1234/stmgmt"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/stmgmt"/>
             <property name="hibernate.connection.username" value="postgres"/>
             <property name="hibernate.connection.password" value="root"/> <!-- Show SQL formatted -->
         </properties>

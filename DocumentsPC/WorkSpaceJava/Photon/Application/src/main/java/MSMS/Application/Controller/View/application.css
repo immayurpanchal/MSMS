@@ -7,6 +7,11 @@
 	-fx-font-family: "Segoe UI Light";
 	-fx-font-size: 16;
 }
+.login-logo{
+	-fx-background-image: url("Resources/Mayur.jpg");
+	-fx-background-repeat: no-repeat;
+	-fx-background-size: contain;
+}
 .login{
 	-fx-background-color: white;
 	-fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.5), 20, 0, 0, 0);

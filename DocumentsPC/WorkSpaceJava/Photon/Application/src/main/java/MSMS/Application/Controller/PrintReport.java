@@ -38,7 +38,7 @@ public class PrintReport  extends JFrame {
     public void showReport() throws ClassNotFoundException, SQLException{
     	System.out.println("Inside Show Report");
     	String myDriver = "org.postgresql.Driver";
-    	String myUrl = "jdbc:postgresql://localhost:1234/stmgmt";
+    	String myUrl = "jdbc:postgresql://localhost:5432/stmgmt";
     	Class.forName(myDriver);
     	Connection conn = DriverManager.getConnection(myUrl, "postgres", "root");
         Statement stmt = conn.createStatement();

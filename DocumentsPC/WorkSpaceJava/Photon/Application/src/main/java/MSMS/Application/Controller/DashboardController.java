@@ -1,6 +1,7 @@
 package MSMS.Application.Controller;
 
 import java.net.URL;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +11,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
-import com.ibm.icu.text.DecimalFormat;
+//import com.ibm.icu.text.DecimalFormat;
 import com.jfoenix.controls.JFXTreeTableColumn;
 import com.jfoenix.controls.JFXTreeTableView;
 import com.jfoenix.controls.RecursiveTreeItem;
@@ -51,6 +52,7 @@ public class DashboardController implements Initializable {
 		em.getTransaction().commit();
 		
 		Double amount = (Double)sell;
+//		DecimalFormat df = new DecimalFormat();
 		DecimalFormat df = new DecimalFormat();
 		df.setMaximumFractionDigits(2);
 				

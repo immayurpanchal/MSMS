@@ -23,12 +23,20 @@
     </dependency>
 
 
-	<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
-	<dependency>
-		<groupId>net.sf.jasperreports</groupId>
-		<artifactId>jasperreports</artifactId>
-		<version>6.6.0</version>
-	</dependency>
+<!-- https://mvnrepository.com/artifact/net.sf.jasperreports/jasperreports -->
+<dependency>
+    <groupId>net.sf.jasperreports</groupId>
+    <artifactId>jasperreports</artifactId>
+    <version>6.7.0</version>
+</dependency>
+
+<!-- https://mvnrepository.com/artifact/net.bytebuddy/byte-buddy-dep -->
+<dependency>
+    <groupId>net.bytebuddy</groupId>
+    <artifactId>byte-buddy-dep</artifactId>
+    <version>1.8.17</version>
+</dependency>
+
 
 	<!-- https://mvnrepository.com/artifact/org.apache.ivy/ivy -->
 	<dependency>
